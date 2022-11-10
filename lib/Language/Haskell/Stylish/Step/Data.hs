@@ -471,7 +471,7 @@ putForAll
     :: GHC.OutputableBndrFlag s 'GHC.Parsed
     => Bool -> [GHC.LHsTyVarBndr s GHC.GhcPs] -> P ()
 putForAll frall ex_tvs = when frall do
-    putText "forall"
+    putText "∀"
     space
     sep space $ putOutputable . GHC.unLoc <$> ex_tvs
     dot
@@ -505,7 +505,7 @@ putConDeclField cfg GHC.ConDeclField {..} = do
 putType' :: Config -> GHC.LHsType GHC.GhcPs -> P ()
 putType' cfg lty = case GHC.unLoc lty of
     GHC.HsForAllTy GHC.NoExtField tele tp -> do
-        putText "forall"
+        putText "∀"
         space
         sep space $ case tele of
             GHC.HsForAllVis   {..} -> putOutputable . GHC.unLoc <$> hsf_vis_bndrs
