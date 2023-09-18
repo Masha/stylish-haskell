@@ -21,11 +21,11 @@ import           Language.Haskell.Stylish.Util                 (everything)
 hsTyReplacements :: GHC.HsType GHC.GhcPs -> Editor.Edits
 hsTyReplacements (GHC.HsFunTy _ arr _ _)
     | GHC.HsUnrestrictedArrow (GHC.L (GHC.TokenLoc epaLoc) GHC.HsNormalTok) <- arr=
-        Editor.replaceRealSrcSpan (GHC.epaLocationRealSrcSpan epaLoc) "→"
+        Editor.replaceRealSrcSpan (GHC.epaLocationRealSrcSpan epaLoc) "->"
 hsTyReplacements (GHC.HsQualTy _ ctx _)
     | Just arrow <- GHC.ac_darrow . GHC.anns . GHC.ann $ GHC.getLoc ctx
     , (GHC.NormalSyntax, GHC.EpaSpan loc _) <- arrow =
-        Editor.replaceRealSrcSpan loc "⇒"
+        Editor.replaceRealSrcSpan loc "=>"
 hsTyReplacements _ = mempty
 
 --------------------------------------------------------------------------------
